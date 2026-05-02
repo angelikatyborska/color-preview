@@ -13,7 +13,7 @@
 </script>
 
 <div>
-  <textarea cols="10" rows="10" bind:value />
+  <textarea cols="10" rows="10" bind:value></textarea>
   {#if colors.length > 0}
     <ul>
       {#each colors as color (color)}

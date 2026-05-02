@@ -7,8 +7,7 @@
 
 <footer>
   <p>
-    <a href="https://github.com/angelikatyborska/color-preview/issues">Report a problem</a
-    >.
+    <a href="https://github.com/angelikatyborska/color-preview/issues">Report a problem</a>.
   </p>
   <p>
     Created by <a href="https://angelika.me">Angelika Cathor</a>.
