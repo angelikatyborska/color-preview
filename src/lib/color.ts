@@ -1,5 +1,7 @@
 import Color, { type ColorInstance } from 'color';
 
+export type ColorFormat = 'rgb' | 'rgb-hex' | 'hsl' | 'hsv' | 'hwb';
+
 export type ParsedColor = ParsedColorOk | ParsedColorError;
 
 export type ParsedColorOk = {
@@ -39,6 +41,41 @@ export const parseColorString = (string: string): ParsedColor => {
 
 export const getOriginalString = (color: ParsedColor) => {
   return color.originalString;
+};
+
+export const getRgb = (color: ParsedColorOk) => {
+  const components = color.colorInstance.rgb().array();
+  if (components.length === 3) {
+    return `rgb(${components[0]} ${components[1]} ${components[2]})`;
+  } else {
+    return `rgb(${components[0]} ${components[1]} ${components[2]} / ${components[3]})`;
+  }
+};
+
+export const getHsl = (color: ParsedColorOk) => {
+  const components = color.colorInstance.hsl().array();
+  if (components.length === 3) {
+    return `hsl(${components[0]} ${components[1]}% ${components[2]}%)`;
+  } else {
+    return `hsl(${components[0]} ${components[1]}% ${components[2]}% / ${components[3]})`;
+  }
+};
+
+export const getHwb = (color: ParsedColorOk) => {
+  const components = color.colorInstance.hwb().array();
+  if (components.length === 3) {
+    return `hwb(${components[0]} ${components[1]}% ${components[2]}%)`;
+  } else {
+    return `hwb(${components[0]} ${components[1]}% ${components[2]}% / ${components[3]})`;
+  }
+};
+
+export const getWhiteness = (color: ParsedColorOk) => {
+  return color.colorInstance.white();
+};
+
+export const getBlackness = (color: ParsedColorOk) => {
+  return color.colorInstance.wblack();
 };
 
 export const getHex = (color: ParsedColorOk) => {

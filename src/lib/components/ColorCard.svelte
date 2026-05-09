@@ -1,44 +1,105 @@
 <script lang="ts">
   import {
+    type ColorFormat,
     getAlpha,
     getBlue,
+    getBlackness,
     getGreen,
     getHex,
+    getHsl,
+    getHue,
+    getHwb,
+    getLightness,
     getOriginalString,
     getRed,
+    getRgb,
+    getSaturation,
+    getWhiteness,
     type ParsedColor
   } from '$lib/color';
 
   interface Props {
     color: ParsedColor;
+    format: ColorFormat;
   }
 
-  const { color }: Props = $props();
+  const { color, format }: Props = $props();
+
+  const formatted = $derived.by(() => {
+    if (color.status === 'ok') {
+      switch (format) {
+        case 'rgb':
+          return getRgb(color);
+        case 'rgb-hex':
+          return getHex(color);
+        case 'hsl':
+          return getHsl(color);
+        case 'hwb':
+          return getHwb(color);
+      }
+    }
+
+    return 'Invalid color';
+  });
+
+  const table = $derived.by(() => {
+    if (color.status === 'ok') {
+      switch (format) {
+        case 'rgb':
+        case 'rgb-hex':
+          return [
+            ['R', getRed(color)],
+            ['G', getGreen(color)],
+            ['B', getBlue(color)],
+            ['A', getAlpha(color)]
+          ];
+        case 'hsl':
+          return [
+            ['H', getHue(color)],
+            ['S', getSaturation(color)],
+            ['L', getLightness(color)],
+            ['A', getAlpha(color)]
+          ];
+        case 'hwb':
+          return [
+            ['H', getHue(color)],
+            ['W', getWhiteness(color)],
+            ['B', getBlackness(color)],
+            ['A', getAlpha(color)]
+          ];
+      }
+    }
+
+    return [];
+  });
 </script>
 
 <div class="card">
   <div class="text">
     <h3 class="title">
       {#if color.status === 'ok'}
-        {getHex(color)}
+        {formatted}
       {:else}
         Invalid color
       {/if}
     </h3>
     <div>
       {#if color.status === 'ok'}
-        <div>R: {getRed(color)}</div>
-        <div>G: {getGreen(color)}</div>
-        <div>B: {getBlue(color)}</div>
-        <div>A: {getAlpha(color)}</div>
+        <table>
+          <tbody>
+            {#each table as row (row)}
+              <tr>
+                <th>{row[0]}</th>
+                <td>{row[1]}</td>
+              </tr>
+            {/each}
+          </tbody>
+        </table>
       {/if}
     </div>
     <div class="original">Original input: {getOriginalString(color)}</div>
   </div>
-  <div
-    class="preview"
-    style={color.status === 'ok' ? `background-color: ${color.originalString}` : ''}
-  >
+  <div class="preview" style={color.status === 'ok' ? `background-color: ${formatted}` : ''}>
     {#if color.status === 'error'}
       ?
     {/if}
@@ -60,6 +121,16 @@
     grid-area: text;
     display: grid;
     grid-template-rows: auto 1fr auto;
+
+    table {
+      border-collapse: collapse;
+    }
+
+    td,
+    th {
+      padding: var(--spacing-xs);
+      border: 1px solid var(--grayscale-70);
+    }
   }
 
   .card,

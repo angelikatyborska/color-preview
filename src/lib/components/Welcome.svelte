@@ -18,7 +18,7 @@
     <ul>
       {#each colors as color (color)}
         <li>
-          <ColorCard {color} />
+          <ColorCard {color} format="hsl" />
         </li>
       {/each}
     </ul>

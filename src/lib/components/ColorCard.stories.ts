@@ -10,8 +10,8 @@ const meta: Meta<ComponentProps<typeof ColorCard>> = {
   argTypes: {
     color: {
       table: {
-        disable: true,
-      },
+        disable: true
+      }
     }
   }
 };
@@ -19,20 +19,65 @@ const meta: Meta<ComponentProps<typeof ColorCard>> = {
 export default meta;
 type Story = StoryObj<ComponentProps<typeof ColorCard>>;
 
-export const ValidColor: Story = {
+export const ValidColorRgb: Story = {
   args: {
-    color: parseColorString('red')
+    color: parseColorString('red'),
+    format: 'rgb'
   }
 };
 
-export const SemiTransparent: Story = {
+export const SemiTransparentRgb: Story = {
   args: {
-    color: parseColorString('rgba(0, 0, 255, 0.5)')
+    color: parseColorString('rgba(0, 0, 255, 0.5)'),
+    format: 'rgb'
+  }
+};
+
+export const ValidColorRgbHex: Story = {
+  args: {
+    color: parseColorString('red'),
+    format: 'rgb-hex'
+  }
+};
+
+export const SemiTransparentRgbHex: Story = {
+  args: {
+    color: parseColorString('rgba(0, 0, 255, 0.5)'),
+    format: 'rgb-hex'
+  }
+};
+
+export const ValidColorHsl: Story = {
+  args: {
+    color: parseColorString('red'),
+    format: 'hsl'
+  }
+};
+
+export const SemiTransparentHsl: Story = {
+  args: {
+    color: parseColorString('rgba(0, 0, 255, 0.5)'),
+    format: 'hsl'
+  }
+};
+
+export const ValidColorHwb: Story = {
+  args: {
+    color: parseColorString('red'),
+    format: 'hwb'
+  }
+};
+
+export const SemiTransparentHwb: Story = {
+  args: {
+    color: parseColorString('rgba(0, 0, 255, 0.5)'),
+    format: 'hwb'
   }
 };
 
 export const InvalidColor: Story = {
   args: {
-    color: parseColorString('notacolor')
+    color: parseColorString('notacolor'),
+    format: 'rgb'
   }
 };
