@@ -39,43 +39,12 @@ export const parseColorString = (string: string): ParsedColor => {
   };
 };
 
+const format = (x: number) => {
+  return Math.round(x * 100) / 100;
+}
+
 export const getOriginalString = (color: ParsedColor) => {
   return color.originalString;
-};
-
-export const getRgb = (color: ParsedColorOk) => {
-  const components = color.colorInstance.rgb().array();
-  if (components.length === 3) {
-    return `rgb(${components[0]} ${components[1]} ${components[2]})`;
-  } else {
-    return `rgb(${components[0]} ${components[1]} ${components[2]} / ${components[3]})`;
-  }
-};
-
-export const getHsl = (color: ParsedColorOk) => {
-  const components = color.colorInstance.hsl().array();
-  if (components.length === 3) {
-    return `hsl(${components[0]} ${components[1]}% ${components[2]}%)`;
-  } else {
-    return `hsl(${components[0]} ${components[1]}% ${components[2]}% / ${components[3]})`;
-  }
-};
-
-export const getHwb = (color: ParsedColorOk) => {
-  const components = color.colorInstance.hwb().array();
-  if (components.length === 3) {
-    return `hwb(${components[0]} ${components[1]}% ${components[2]}%)`;
-  } else {
-    return `hwb(${components[0]} ${components[1]}% ${components[2]}% / ${components[3]})`;
-  }
-};
-
-export const getWhiteness = (color: ParsedColorOk) => {
-  return color.colorInstance.white();
-};
-
-export const getBlackness = (color: ParsedColorOk) => {
-  return color.colorInstance.wblack();
 };
 
 export const getHex = (color: ParsedColorOk) => {
@@ -86,30 +55,65 @@ export const getHex = (color: ParsedColorOk) => {
   }
 };
 
+export const getRgb = (color: ParsedColorOk) => {
+  const components = color.colorInstance.rgb().array();
+  if (components.length === 3) {
+    return `rgb(${format(components[0])} ${format(components[1])} ${format(components[2])})`;
+  } else {
+    return `rgb(${format(components[0])} ${format(components[1])} ${format(components[2])} / ${format(components[3])})`;
+  }
+};
+
+export const getHsl = (color: ParsedColorOk) => {
+  const components = color.colorInstance.hsl().array();
+  if (components.length === 3) {
+    return `hsl(${format(components[0])} ${format(components[1])}% ${format(components[2])}%)`;
+  } else {
+    return `hsl(${format(components[0])} ${format(components[1])}% ${format(components[2])}% / ${format(components[3])})`;
+  }
+};
+
+export const getHwb = (color: ParsedColorOk) => {
+  const components = color.colorInstance.hwb().array();
+  if (components.length === 3) {
+    return `hwb(${format(components[0])} ${format(components[1])}% ${format(components[2])}%)`;
+  } else {
+    return `hwb(${format(components[0])} ${format(components[1])}% ${format(components[2])}% / ${format(components[3])})`;
+  }
+};
+
+export const getWhiteness = (color: ParsedColorOk) => {
+  return format(color.colorInstance.white());
+};
+
+export const getBlackness = (color: ParsedColorOk) => {
+  return format(color.colorInstance.wblack());
+};
+
 export const getRed = (color: ParsedColorOk) => {
-  return color.colorInstance.red();
+  return format(color.colorInstance.red());
 };
 
 export const getGreen = (color: ParsedColorOk) => {
-  return color.colorInstance.green();
+  return format(color.colorInstance.green());
 };
 
 export const getBlue = (color: ParsedColorOk) => {
-  return color.colorInstance.blue();
+  return format(color.colorInstance.blue());
 };
 
 export const getHue = (color: ParsedColorOk) => {
-  return color.colorInstance.hue();
+  return format(color.colorInstance.hue());
 };
 
 export const getSaturation = (color: ParsedColorOk) => {
-  return color.colorInstance.saturationl();
+  return format(color.colorInstance.saturationl());
 };
 
 export const getLightness = (color: ParsedColorOk) => {
-  return color.colorInstance.lightness();
+  return format(color.colorInstance.lightness());
 };
 
 export const getAlpha = (color: ParsedColorOk) => {
-  return color.colorInstance.alpha();
+  return format(color.colorInstance.alpha());
 };
