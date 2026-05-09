@@ -1,20 +1,20 @@
 <script lang="ts">
   import {
     type ColorFormat,
-    getAlpha,
-    getBlue,
-    getBlackness,
-    getGreen,
-    getHex,
-    getHsl,
-    getHue,
-    getHwb,
-    getLightness,
     getOriginalString,
+    getAlpha,
     getRed,
-    getRgb,
+    getGreen,
+    getBlue,
+    getHue,
     getSaturation,
+    getLightness,
     getWhiteness,
+    getBlackness,
+    toHex,
+    toHsl,
+    toHwb,
+    toRgb,
     type ParsedColor
   } from '$lib/color';
 
@@ -29,13 +29,13 @@
     if (color.status === 'ok') {
       switch (format) {
         case 'rgb':
-          return getRgb(color);
+          return toRgb(color);
         case 'rgb-hex':
-          return getHex(color);
+          return toHex(color);
         case 'hsl':
-          return getHsl(color);
+          return toHsl(color);
         case 'hwb':
-          return getHwb(color);
+          return toHwb(color);
       }
     }
 

@@ -2,7 +2,7 @@ import { describe, it, expect } from 'vitest';
 import {
   parseColorString,
   getOriginalString,
-  getHex,
+  toHex,
   getRed,
   getGreen,
   getBlue,
@@ -10,9 +10,9 @@ import {
   getSaturation,
   getLightness,
   getAlpha,
-  getRgb,
-  getHsl,
-  getHwb,
+  toRgb,
+  toHsl,
+  toHwb,
   getWhiteness,
   getBlackness
 } from './color';
@@ -63,57 +63,57 @@ describe('color', () => {
 
   describe('getHex', () => {
     it('returns a hex string for an opaque color', () => {
-      expect(getHex(red)).toBe('#FF0000');
+      expect(toHex(red)).toBe('#FF0000');
     });
 
     it('returns a hex string for a semi-transparent blue', () => {
-      expect(getHex(semiTransparentBlue)).toMatch("#0000FF80");
+      expect(toHex(semiTransparentBlue)).toMatch('#0000FF80');
     });
 
     it('returns a hex string for semiTransparentCoffee', () => {
-      expect(getHex(semiTransparentCoffee)).toBe('#C0FFEE35');
+      expect(toHex(semiTransparentCoffee)).toBe('#C0FFEE35');
     });
   });
 
   describe('getRgb', () => {
     it('returns an rgb representation for red', () => {
-      expect(getRgb(red)).toBe('rgb(255 0 0)');
+      expect(toRgb(red)).toBe('rgb(255 0 0)');
     });
 
     it('returns an rgb representation for a semi-transparent blue', () => {
-      expect(getRgb(semiTransparentBlue)).toBe('rgb(0 0 255 / 0.5)');
+      expect(toRgb(semiTransparentBlue)).toBe('rgb(0 0 255 / 0.5)');
     });
 
     it('returns an rgb representation for semi-transparent coffee', () => {
-      expect(getRgb(semiTransparentCoffee)).toBe('rgb(192 255 238 / 0.21)');
+      expect(toRgb(semiTransparentCoffee)).toBe('rgb(192 255 238 / 0.21)');
     });
   });
 
   describe('getHsl', () => {
     it('returns an hsl representation for red', () => {
-      expect(getHsl(red)).toBe('hsl(0 100% 50%)');
+      expect(toHsl(red)).toBe('hsl(0 100% 50%)');
     });
 
     it('returns an hsl representation for a semi-transparent blue', () => {
-      expect(getHsl(semiTransparentBlue)).toBe('hsl(240 100% 50% / 0.5)');
+      expect(toHsl(semiTransparentBlue)).toBe('hsl(240 100% 50% / 0.5)');
     });
 
     it('returns an hsl representation for semi-transparent coffee', () => {
-      expect(getHsl(semiTransparentCoffee)).toBe('hsl(163.81 100% 87.65% / 0.21)');
+      expect(toHsl(semiTransparentCoffee)).toBe('hsl(163.81 100% 87.65% / 0.21)');
     });
   });
 
   describe('getHwb', () => {
     it('returns an hwb representation for red', () => {
-      expect(getHwb(red)).toBe('hwb(0 0% 0%)');
+      expect(toHwb(red)).toBe('hwb(0 0% 0%)');
     });
 
     it('returns an hwb representation for a semi-transparent blue', () => {
-      expect(getHwb(semiTransparentBlue)).toBe('hwb(240 0% 0% / 0.5)');
+      expect(toHwb(semiTransparentBlue)).toBe('hwb(240 0% 0% / 0.5)');
     });
 
     it('returns an hwb representation for semi-transparent coffee', () => {
-      expect(getHwb(semiTransparentCoffee)).toBe('hwb(163.81 75.29% 0% / 0.21)');
+      expect(toHwb(semiTransparentCoffee)).toBe('hwb(163.81 75.29% 0% / 0.21)');
     });
   });
 
