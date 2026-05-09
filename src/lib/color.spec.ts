@@ -20,12 +20,13 @@ import {
 describe('color', () => {
   const red = parseColorString('red');
   const semiTransparentBlue = parseColorString('rgba(0, 0, 255, 0.5)');
-  const hslColor = parseColorString('hsl(120, 50%, 40%)');
+  const semiTransparentCoffee = parseColorString('#c0ffee35');
 
   if (red.status !== 'ok') throw new Error('Expected red to parse ok');
   if (semiTransparentBlue.status !== 'ok')
     throw new Error('Expected semiTransparentBlue to parse ok');
-  if (hslColor.status !== 'ok') throw new Error('Expected hslColor to parse ok');
+  if (semiTransparentCoffee.status !== 'ok')
+    throw new Error('Expected semiTransparentCoffee to parse ok');
 
   describe('parseColorString', () => {
     it('parses a valid color and returns status ok', () => {
@@ -65,8 +66,12 @@ describe('color', () => {
       expect(getHex(red)).toBe('#FF0000');
     });
 
-    it('returns a hexa string for a semi-transparent color', () => {
+    it('returns a hex string for a semi-transparent blue', () => {
       expect(getHex(semiTransparentBlue)).toMatch(/^#[0-9A-Fa-f]{8}$/);
+    });
+
+    it('returns a hex string for semiTransparentCoffee', () => {
+      expect(getHex(semiTransparentCoffee)).toBe('#C0FFEE35');
     });
   });
 
@@ -75,8 +80,12 @@ describe('color', () => {
       expect(getRgb(red)).toBe('rgb(255 0 0)');
     });
 
-    it('returns an rgba representation for a semi-transparent color', () => {
+    it('returns an rgb representation for a semi-transparent blue', () => {
       expect(getRgb(semiTransparentBlue)).toBe('rgb(0 0 255 / 0.5)');
+    });
+
+    it('returns an rgb representation for semi-transparent coffee', () => {
+      expect(getRgb(semiTransparentCoffee)).toBe('rgb(192 255 238 / 0.20784313725490197)');
     });
   });
 
@@ -85,8 +94,12 @@ describe('color', () => {
       expect(getHsl(red)).toBe('hsl(0 100% 50%)');
     });
 
-    it('returns an hsla representation for a semi-transparent color', () => {
+    it('returns an hsl representation for a semi-transparent blue', () => {
       expect(getHsl(semiTransparentBlue)).toBe('hsl(240 100% 50% / 0.5)');
+    });
+
+    it('returns an hsl representation for semi-transparent coffee', () => {
+      expect(getHsl(semiTransparentCoffee)).toBe('hsl(163.80952380952385 100% 87.6470588235294% / 0.20784313725490197)');
     });
   });
 
@@ -95,8 +108,12 @@ describe('color', () => {
       expect(getHwb(red)).toBe('hwb(0 0% 0%)');
     });
 
-    it('returns an hwba representation for a semi-transparent color', () => {
+    it('returns an hwb representation for a semi-transparent blue', () => {
       expect(getHwb(semiTransparentBlue)).toBe('hwb(240 0% 0% / 0.5)');
+    });
+
+    it('returns an hwb representation for semi-transparent coffee', () => {
+      expect(getHwb(semiTransparentCoffee)).toBe('hwb(163.80952380952385 75.29411764705883% 0% / 0.20784313725490197)');
     });
   });
 
@@ -108,6 +125,10 @@ describe('color', () => {
 
       it('returns 0.5 for rgba(0, 0, 255, 0.5)', () => {
         expect(getAlpha(semiTransparentBlue)).toBe(0.5);
+      });
+
+      it('returns ~0.208 for semiTransparentCoffee', () => {
+        expect(getAlpha(semiTransparentCoffee)).toBeCloseTo(0.20784313725490197);
       });
     });
 
@@ -156,7 +177,9 @@ describe('color', () => {
         });
 
         it('returns 120 for hsl(120, 50%, 40%)', () => {
-          expect(getHue(hslColor)).toBe(120);
+          const green = parseColorString('hsl(120, 50%, 40%)');
+          if (green.status !== 'ok') throw new Error();
+          expect(getHue(green)).toBe(120);
         });
       });
 
@@ -166,7 +189,9 @@ describe('color', () => {
         });
 
         it('returns 50 for hsl(120, 50%, 40%)', () => {
-          expect(getSaturation(hslColor)).toBe(50);
+          const green = parseColorString('hsl(120, 50%, 40%)');
+          if (green.status !== 'ok') throw new Error();
+          expect(getSaturation(green)).toBe(50);
         });
       });
 
@@ -176,7 +201,9 @@ describe('color', () => {
         });
 
         it('returns 40 for hsl(120, 50%, 40%)', () => {
-          expect(getLightness(hslColor)).toBe(40);
+          const green = parseColorString('hsl(120, 50%, 40%)');
+          if (green.status !== 'ok') throw new Error();
+          expect(getLightness(green)).toBe(40);
         });
       });
     });
@@ -192,6 +219,12 @@ describe('color', () => {
           if (white.status !== 'ok') throw new Error();
           expect(getWhiteness(white)).toBe(100);
         });
+
+        it('returns 20 for hsl(120, 50%, 40%)', () => {
+          const green = parseColorString('hsl(120, 50%, 40%)');
+          if (green.status !== 'ok') throw new Error();
+          expect(getWhiteness(green)).toBe(19.999999999999993);
+        });
       });
 
       describe('getBlackness', () => {
@@ -203,6 +236,12 @@ describe('color', () => {
           const black = parseColorString('black');
           if (black.status !== 'ok') throw new Error();
           expect(getBlackness(black)).toBe(100);
+        });
+
+        it('returns 40 for hsl(120, 50%, 40%)', () => {
+          const green = parseColorString('hsl(120, 50%, 40%)');
+          if (green.status !== 'ok') throw new Error();
+          expect(getBlackness(green)).toBe(39.99999999999999);
         });
       });
     });
