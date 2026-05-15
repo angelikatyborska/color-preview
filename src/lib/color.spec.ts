@@ -99,7 +99,7 @@ describe('color', () => {
     });
 
     it('returns an hsl representation for semi-transparent coffee', () => {
-      expect(toHsl(semiTransparentCoffee)).toBe('hsl(163.81 100% 87.65% / 0.21)');
+      expect(toHsl(semiTransparentCoffee)).toBe('hsl(164 100% 88% / 0.21)');
     });
   });
 
@@ -113,7 +113,7 @@ describe('color', () => {
     });
 
     it('returns an hwb representation for semi-transparent coffee', () => {
-      expect(toHwb(semiTransparentCoffee)).toBe('hwb(163.81 75.29% 0% / 0.21)');
+      expect(toHwb(semiTransparentCoffee)).toBe('hwb(164 75% 0% / 0.21)');
     });
   });
 

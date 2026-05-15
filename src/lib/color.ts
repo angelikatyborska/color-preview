@@ -16,6 +16,8 @@ export type ParsedColorError = {
   status: 'error';
 };
 
+const alphaPrecision = 2;
+
 export const parseColorString = (string: string): ParsedColor => {
   const normalized = string.trim().toLowerCase();
 
@@ -39,8 +41,8 @@ export const parseColorString = (string: string): ParsedColor => {
   };
 };
 
-const format = (x: number) => {
-  return Math.round(x * 100) / 100;
+const format = (x: number, precision: number = 0) => {
+  return Math.round(x * Math.pow(10, precision)) / Math.pow(10, precision);
 };
 
 export const getOriginalString = (color: ParsedColor) => {
@@ -60,7 +62,7 @@ export const toRgb = (color: ParsedColorOk) => {
   if (components.length === 3) {
     return `rgb(${format(components[0])} ${format(components[1])} ${format(components[2])})`;
   } else {
-    return `rgb(${format(components[0])} ${format(components[1])} ${format(components[2])} / ${format(components[3])})`;
+    return `rgb(${format(components[0])} ${format(components[1])} ${format(components[2])} / ${format(components[3], alphaPrecision)})`;
   }
 };
 
@@ -69,7 +71,7 @@ export const toHsl = (color: ParsedColorOk) => {
   if (components.length === 3) {
     return `hsl(${format(components[0])} ${format(components[1])}% ${format(components[2])}%)`;
   } else {
-    return `hsl(${format(components[0])} ${format(components[1])}% ${format(components[2])}% / ${format(components[3])})`;
+    return `hsl(${format(components[0])} ${format(components[1])}% ${format(components[2])}% / ${format(components[3], alphaPrecision)})`;
   }
 };
 
@@ -78,7 +80,7 @@ export const toHwb = (color: ParsedColorOk) => {
   if (components.length === 3) {
     return `hwb(${format(components[0])} ${format(components[1])}% ${format(components[2])}%)`;
   } else {
-    return `hwb(${format(components[0])} ${format(components[1])}% ${format(components[2])}% / ${format(components[3])})`;
+    return `hwb(${format(components[0])} ${format(components[1])}% ${format(components[2])}% / ${format(components[3], alphaPrecision)})`;
   }
 };
 
@@ -115,5 +117,5 @@ export const getLightness = (color: ParsedColorOk) => {
 };
 
 export const getAlpha = (color: ParsedColorOk) => {
-  return format(color.colorInstance.alpha());
+  return format(color.colorInstance.alpha(), alphaPrecision);
 };
