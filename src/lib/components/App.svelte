@@ -4,6 +4,7 @@
   import ColorCard from '$lib/components/ColorCard.svelte';
   import FormatSelect from '$lib/components/FormatSelect.svelte';
   import { getFormat } from '$lib/components/appState.svelte';
+  import InputWithLabel from '$lib/components/InputWithLabel.svelte';
 
   let value = $state<string>('hsla(30deg 82% 43% / 0.5)\nd\n#ff0\n\n#c0ffee35\n#c0ffee');
   let colors = $derived(
@@ -22,9 +23,10 @@
 
   <div class="form">
     <h2 class="step-heading">1. Input</h2>
-    <label for="color-list-input">Color list</label>
-    <textarea id="color-list-input" name="color-list-input" cols="10" rows="10" bind:value
-    ></textarea>
+    <InputWithLabel labelFor="color-list-input" label="Color list">
+      <textarea id="color-list-input" name="color-list-input" cols="10" rows="10" bind:value
+      ></textarea>
+    </InputWithLabel>
   </div>
   <div>
     <h2 class="step-heading">2. Preview</h2>
@@ -61,26 +63,19 @@
     font-size: var(--font-size-h4);
   }
 
-  .form {
-    display: flex;
-    flex-direction: column;
-
-    label {
-      font-weight: 700;
-    }
-
-    textarea {
-      resize: vertical;
-      padding: var(--spacing-md);
-      border-radius: var(--spacing-sm);
-      border: 1px solid var(--grayscale-70);
-    }
+  textarea {
+    resize: vertical;
+    padding: var(--spacing-md);
+    border-radius: var(--spacing-sm);
+    border: 1px solid var(--grayscale-70);
+    font-family: var(--code-font-family);
   }
 
   .settings {
     display: flex;
     flex-direction: row;
     justify-content: end;
+    font-size: var(--font-size-small);
   }
 
   ul {
