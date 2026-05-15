@@ -2,6 +2,8 @@
   import { parseColorString } from '$lib/color';
 
   import ColorCard from '$lib/components/ColorCard.svelte';
+  import FormatSelect from '$lib/components/FormatSelect.svelte';
+  import { getFormat } from '$lib/components/appState.svelte';
 
   let value = $state<string>('hsla(30deg 82% 43% / 0.5)\nd\n#ff0\n\n#c0ffee35\n#c0ffee');
   let colors = $derived(
@@ -14,11 +16,12 @@
 
 <div>
   <textarea cols="10" rows="10" bind:value></textarea>
+  <FormatSelect />
   {#if colors.length > 0}
     <ul>
       {#each colors as color (color)}
         <li>
-          <ColorCard {color} format="hsl" />
+          <ColorCard {color} format={getFormat()} />
         </li>
       {/each}
     </ul>
