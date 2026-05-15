@@ -14,29 +14,82 @@
   );
 </script>
 
-<div>
-  <textarea cols="10" rows="10" bind:value></textarea>
-  <FormatSelect />
-  {#if colors.length > 0}
-    <ul>
-      {#each colors as color (color)}
-        <li>
-          <ColorCard {color} format={getFormat()} />
-        </li>
-      {/each}
-    </ul>
-  {/if}
+<div class="app">
+  <div class="intro">
+    <h1>Bulk Color Preview</h1>
+    <p>Input a list of colors separated by new lines.</p>
+  </div>
+
+  <div class="form">
+    <h2 class="step-heading">1. Input</h2>
+    <label for="color-list-input">Color list</label>
+    <textarea id="color-list-input" name="color-list-input" cols="10" rows="10" bind:value
+    ></textarea>
+  </div>
+  <div>
+    <h2 class="step-heading">2. Preview</h2>
+
+    <div class="settings">
+      <FormatSelect />
+    </div>
+    {#if colors.length > 0}
+      <ul>
+        {#each colors as color (color)}
+          <li>
+            <ColorCard {color} format={getFormat()} />
+          </li>
+        {/each}
+      </ul>
+    {/if}
+  </div>
+  <div>
+    <h2 class="step-heading">3. Export</h2>
+  </div>
 </div>
 
 <style>
+  .app {
+    display: grid;
+    grid-auto-rows: min-content;
+  }
+
+  .intro {
+    text-align: center;
+  }
+
+  .step-heading {
+    font-size: var(--font-size-h4);
+  }
+
+  .form {
+    display: flex;
+    flex-direction: column;
+
+    label {
+      font-weight: 700;
+    }
+
+    textarea {
+      resize: vertical;
+      padding: var(--spacing-md);
+      border-radius: var(--spacing-sm);
+      border: 1px solid var(--grayscale-70);
+    }
+  }
+
+  .settings {
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+  }
+
   ul {
     display: grid;
     grid-template-columns: 1fr;
-    grid-auto-rows: fit-content;
+    grid-auto-rows: min-content;
     margin: 0;
     padding: 0;
     list-style-type: '';
-    max-width: 500px;
     gap: var(--spacing-md);
   }
 </style>

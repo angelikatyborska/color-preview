@@ -39,7 +39,7 @@
       }
     }
 
-    return 'Invalid color';
+    return null;
   });
 
   const table = $derived.by(() => {
@@ -78,7 +78,7 @@
   <div class="text">
     <h3 class="title">
       {#if color.status === 'ok'}
-        {formatted}
+        <code>{formatted}</code>
       {:else}
         Invalid color
       {/if}
@@ -86,18 +86,27 @@
     <div>
       {#if color.status === 'ok'}
         <table>
-          <tbody>
-            {#each table as row (row)}
-              <tr>
+          <thead>
+            <tr>
+              {#each table as row (row)}
                 <th>{row[0]}</th>
-                <td>{row[1]}</td>
-              </tr>
-            {/each}
+              {/each}
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              {#each table as row (row)}
+                <td><code>{row[1]}</code></td>
+              {/each}
+            </tr>
           </tbody>
         </table>
       {/if}
     </div>
-    <div class="original">Original input: {getOriginalString(color)}</div>
+    <dl class="original">
+      <dt>Original input</dt>
+      <dd><code>{getOriginalString(color)}</code></dd>
+    </dl>
   </div>
   <div class="preview" style={color.status === 'ok' ? `background-color: ${formatted}` : ''}>
     {#if color.status === 'error'}
@@ -108,13 +117,13 @@
 
 <style>
   .card {
-    font-family: var(--code-font-family);
     display: grid;
     grid-template-areas: 'text preview';
     padding: var(--spacing-md);
     border-radius: var(--spacing-sm);
     border: 1px solid var(--grayscale-70);
     grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+    background-color: var(--grayscale-100);
   }
 
   .text {
@@ -124,12 +133,14 @@
 
     table {
       border-collapse: collapse;
+      width: 100%;
     }
 
     td,
     th {
       padding: var(--spacing-xs);
       border: 1px solid var(--grayscale-70);
+      width: 25%;
     }
   }
 
@@ -141,6 +152,22 @@
   .title {
     margin: 0;
     font-weight: 700;
+    font-size: var(--font-size-h5);
+  }
+
+  .original {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+
+    dt {
+      font-weight: 700;
+      font-size: var(--font-size-small);
+    }
+
+    dd {
+      margin: 0;
+    }
   }
 
   .preview {

@@ -5,7 +5,7 @@ export type AppState = {
 };
 
 const appState = $state<AppState>({
-  format: 'hsl'
+  format: 'rgb-hex'
 });
 
 export const setFormat = (format: ColorFormat) => {
