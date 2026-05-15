@@ -1,9 +1,9 @@
 <script>
-  import Welcome from '$lib/components/Welcome.svelte';
+  import App from '$lib/components/App.svelte';
 </script>
 
 <h1>Color Preview</h1>
-<Welcome />
+<App />
 
 <footer>
   <p>
