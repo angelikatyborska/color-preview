@@ -105,7 +105,13 @@
     </div>
     <dl class="original">
       <dt>Original input</dt>
-      <dd><code>{getOriginalString(color)}</code></dd>
+      <dd>
+        {#if getOriginalString(color).trim()}
+          <code>{getOriginalString(color)}</code>
+        {:else}
+          <em>empty</em>
+        {/if}
+      </dd>
     </dl>
   </div>
   <div class="preview" style={color.status === 'ok' ? `background-color: ${formatted}` : ''}>
@@ -122,7 +128,7 @@
     padding: var(--spacing-md);
     border-radius: var(--spacing-sm);
     border: 1px solid var(--grayscale-70);
-    grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+    grid-template-columns: minmax(0, 5fr) minmax(0, 2fr);
     background-color: var(--grayscale-100);
   }
 

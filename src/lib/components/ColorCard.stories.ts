@@ -81,3 +81,10 @@ export const InvalidColor: Story = {
     format: 'rgb'
   }
 };
+
+export const InvalidEmptyColor: Story = {
+  args: {
+    color: parseColorString(''),
+    format: 'rgb'
+  }
+};
