@@ -1,6 +1,7 @@
 <script lang="ts">
   import { getSortDirection, getSortField, setSort } from './appState.svelte';
   import InputWithLabel from '$lib/components/InputWithLabel.svelte';
+  import Select from '$lib/components/Select.svelte';
   import type { ColorSortDirection, ColorSortField } from '$lib/colors';
 
   const options: Array<{ key: `${ColorSortField}-${ColorSortDirection}`; label: string }> = [
@@ -17,7 +18,7 @@
 </script>
 
 <InputWithLabel labelFor="color-sort-select" label="Sort">
-  <select
+  <Select
     id="color-sort-select"
     name="color-sort-select"
     value={`${getSortField()}-${getSortDirection()}`}
@@ -31,5 +32,5 @@
     {#each options as option (option.key)}
       <option value={option.key}>{option.label}</option>
     {/each}
-  </select>
+  </Select>
 </InputWithLabel>

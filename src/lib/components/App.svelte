@@ -22,7 +22,6 @@
 <div class="app">
   <div class="intro">
     <h1>Bulk Color Preview</h1>
-    <p>Input a list of colors separated by new lines.</p>
   </div>
 
   <div class="form">
@@ -31,13 +30,16 @@
       <textarea id="color-list-input" name="color-list-input" cols="10" rows="10" bind:value
       ></textarea>
     </InputWithLabel>
+    <p>Input a list of colors separated by new lines.</p>
   </div>
   <div>
-    <h2 class="step-heading">2. Preview</h2>
+    <div class="heading-with-settings-wrapper">
+      <h2 class="step-heading">2. Preview</h2>
 
-    <div class="settings">
-      <FormatSelect />
-      <SortSelect />
+      <div class="settings">
+        <FormatSelect />
+        <SortSelect />
+      </div>
     </div>
     {#if colors.length > 0}
       <ul>
@@ -55,9 +57,12 @@
 </div>
 
 <style>
+  @import '../../app.css';
+
   .app {
     display: grid;
     grid-auto-rows: min-content;
+    gap: var(--spacing-lg);
   }
 
   .intro {
@@ -68,11 +73,18 @@
     font-size: var(--font-size-h4);
   }
 
+  .heading-with-settings-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
   textarea {
     resize: vertical;
     padding: var(--spacing-md);
-    border-radius: var(--spacing-sm);
-    border: 1px solid var(--grayscale-70);
+    border-radius: var(--box-border-radius);
+    border: var(--box-border);
     font-family: var(--code-font-family);
   }
 
@@ -80,6 +92,7 @@
     display: flex;
     flex-direction: row;
     justify-content: end;
+    gap: var(--spacing-xs);
     font-size: var(--font-size-small);
   }
 

@@ -26,8 +26,9 @@
 
 <style>
   :root {
-    --paragraph-font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-    --code-font-family: Courier, monospace;
+    --heading-font-family: 'Alfa Slab One', serif;
+    --paragraph-font-family: 'Roboto', Helvetica Neue, Helvetica, Arial, sans-serif;
+    --code-font-family: 'Roboto Mono', Courier, monospace;
 
     --font-size-h1: 2.986rem;
     --font-size-h2: 2.488rem;
@@ -59,6 +60,12 @@
     --spacing-md: 16px;
     --spacing-lg: 32px;
     --spacing-xl: 64px;
+
+    --box-border: 1px solid var(--grayscale-70);
+    --box-border-radius: var(--spacing-sm);
+    --box-border-radius-small: var(--spacing-xs);
+    --transition-duration: 0.2s;
+    --transition-function: ease-in-out;
   }
 
   :global(body) {
@@ -75,34 +82,50 @@
 
   :global(h1) {
     font-size: var(--font-size-h1);
+    font-family: var(--heading-font-family);
   }
 
   :global(h2) {
     font-size: var(--font-size-h2);
+    font-family: var(--heading-font-family);
+    font-weight: 400;
   }
 
   :global(h3) {
     font-size: var(--font-size-h3);
+    font-family: var(--heading-font-family);
+    font-weight: 400;
   }
 
   :global(h4) {
     font-size: var(--font-size-h4);
+    font-family: var(--heading-font-family);
+    font-weight: 400;
   }
 
   :global(h5) {
     font-size: var(--font-size-h5);
+    font-family: var(--heading-font-family);
+    font-weight: 400;
   }
 
   :global(h6) {
     font-size: var(--font-size-h6);
+    font-family: var(--heading-font-family);
+    font-weight: 400;
   }
 
   :global(p) {
     font-size: var(--font-size-p);
   }
 
+  :global(main) {
+    padding: var(--spacing-sm);
+  }
+
   :global(a) {
     color: var(--text-color);
+    transition: var(--transition-duration) color var(--transition-function);
   }
 
   footer {

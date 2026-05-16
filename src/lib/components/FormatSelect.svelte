@@ -2,6 +2,7 @@
   import type { ColorFormat } from '$lib/color';
   import { getFormat, setFormat } from './appState.svelte';
   import InputWithLabel from '$lib/components/InputWithLabel.svelte';
+  import Select from '$lib/components/Select.svelte';
 
   const options: Array<{ key: ColorFormat; label: string }> = [
     { key: 'rgb-hex', label: 'RGB (hex)' },
@@ -12,7 +13,7 @@
 </script>
 
 <InputWithLabel labelFor="color-format-select" label="Format">
-  <select
+  <Select
     id="color-format-select"
     name="color-format-select"
     value={getFormat()}
@@ -21,5 +22,5 @@
     {#each options as option (option.key)}
       <option value={option.key}>{option.label}</option>
     {/each}
-  </select>
+  </Select>
 </InputWithLabel>

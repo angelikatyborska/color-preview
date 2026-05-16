@@ -129,8 +129,8 @@
     display: grid;
     grid-template-areas: 'text preview';
     padding: var(--spacing-md);
-    border-radius: var(--spacing-sm);
-    border: 1px solid var(--grayscale-70);
+    border-radius: var(--box-border-radius);
+    border: var(--box-border);
     grid-template-columns: minmax(0, 5fr) minmax(0, 2fr);
     background-color: var(--grayscale-100);
   }
@@ -184,7 +184,6 @@
 
   .preview {
     grid-area: preview;
-    border-radius: var(--spacing-xs);
     position: relative;
     background: white;
     overflow: hidden;
@@ -224,6 +223,9 @@
     .content {
       position: relative;
       z-index: 2;
+      font-family: var(--heading-font-family);
+      color: var(--grayscale-80);
+      user-select: none;
     }
   }
 </style>
