@@ -114,9 +114,12 @@
       </dd>
     </dl>
   </div>
-  <div class="preview" style={color.status === 'ok' ? `background-color: ${formatted}` : ''}>
+  <div
+    class="preview"
+    style={color.status === 'ok' ? `--color-card-preview-background-color: ${formatted}` : ''}
+  >
     {#if color.status === 'error'}
-      ?
+      <span class="content">?</span>
     {/if}
   </div>
 </div>
@@ -140,6 +143,9 @@
     table {
       border-collapse: collapse;
       width: 100%;
+    }
+    tr {
+      border-radius: var(--spacing-xs);
     }
 
     td,
@@ -202,9 +208,22 @@
       width: 200%;
       height: 200%;
       background-color: black;
-      z-index: -1;
       transform-origin: top right;
       rotate: -45deg;
+      z-index: 1;
+    }
+
+    &:after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-color: var(--color-card-preview-background-color, white);
+      z-index: 1;
+    }
+
+    .content {
+      position: relative;
+      z-index: 2;
     }
   }
 </style>
