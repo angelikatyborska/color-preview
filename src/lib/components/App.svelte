@@ -3,16 +3,20 @@
 
   import ColorCard from '$lib/components/ColorCard.svelte';
   import FormatSelect from '$lib/components/FormatSelect.svelte';
-  import { getFormat } from '$lib/components/appState.svelte';
+  import { getFormat, getSortDirection, getSortField } from '$lib/components/appState.svelte';
   import InputWithLabel from '$lib/components/InputWithLabel.svelte';
+  import { sortColors } from '$lib/colors';
+  import SortSelect from '$lib/components/SortSelect.svelte';
 
   let value = $state<string>('hsla(30deg 82% 43% / 0.5)\nd\n#ff0\n\n#c0ffee35\n#c0ffee');
-  let colors = $derived(
-    value
+  let colors = $derived.by(() => {
+    const colors = value
       ?.split('\n')
       .map((x) => parseColorString(x))
-      .filter((x) => !!x)
-  );
+      .filter((x) => !!x);
+
+    return sortColors(colors, getSortField(), getSortDirection());
+  });
 </script>
 
 <div class="app">
@@ -33,6 +37,7 @@
 
     <div class="settings">
       <FormatSelect />
+      <SortSelect />
     </div>
     {#if colors.length > 0}
       <ul>
