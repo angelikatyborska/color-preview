@@ -129,8 +129,6 @@
     display: grid;
     grid-template-areas: 'text preview';
     padding: var(--spacing-md);
-    border-radius: var(--box-border-radius);
-    border: var(--box-border);
     grid-template-columns: minmax(0, 5fr) minmax(0, 2fr);
     background-color: var(--grayscale-100);
   }
@@ -183,12 +181,12 @@
   }
 
   .preview {
+    container-type: inline-size;
     grid-area: preview;
     position: relative;
     background: white;
     overflow: hidden;
     aspect-ratio: 1/1;
-    font-size: 100px;
     text-align: center;
     display: flex;
     flex-direction: row;
@@ -221,6 +219,7 @@
     }
 
     .content {
+      font-size: 50cqi;
       position: relative;
       z-index: 2;
       font-family: var(--heading-font-family);

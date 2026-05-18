@@ -20,12 +20,10 @@
 </script>
 
 <div class="app">
-  <div class="intro">
-    <h1>Bulk Color Preview</h1>
-  </div>
-
   <div class="form">
-    <h2 class="step-heading">1. Input</h2>
+    <div class="step-heading-wrapper">
+      <h2 class="step-heading">1. Input</h2>
+    </div>
     <InputWithLabel labelFor="color-list-input" label="Color list">
       <textarea id="color-list-input" name="color-list-input" cols="10" rows="10" bind:value
       ></textarea>
@@ -33,7 +31,7 @@
     <p>Input a list of colors separated by new lines.</p>
   </div>
   <div>
-    <div class="heading-with-settings-wrapper">
+    <div class="step-heading-wrapper">
       <h2 class="step-heading">2. Preview</h2>
 
       <div class="settings">
@@ -57,35 +55,41 @@
 </div>
 
 <style>
-  @import '../../app.css';
-
   .app {
     display: grid;
     grid-auto-rows: min-content;
     gap: var(--spacing-lg);
   }
 
-  .intro {
-    text-align: center;
-  }
-
   .step-heading {
+    margin: 0;
     font-size: var(--font-size-h4);
+    white-space: nowrap;
   }
 
-  .heading-with-settings-wrapper {
+  .step-heading-wrapper {
+    margin-block: 0 var(--spacing-lg);
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    gap: var(--spacing-lg);
   }
 
   textarea {
     resize: vertical;
+    background-color: var(--grayscale-100);
+    border: 0;
+    border-left: 2px solid var(--purple-70);
     padding: var(--spacing-md);
-    border-radius: var(--box-border-radius);
-    border: var(--box-border);
     font-family: var(--code-font-family);
+
+    @media (prefers-reduced-motion: no-preference) {
+      animation-name: var(--hue-rotate-animation-name);
+      animation-duration: var(--hue-rotate-animation-duration);
+      animation-timing-function: var(--hue-rotate-animation-timing-function);
+      animation-iteration-count: var(--hue-rotate-animation-iteration-count);
+    }
   }
 
   .settings {

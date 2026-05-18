@@ -1,0 +1,134 @@
+:root {
+  --heading-font-family: 'Alfa Slab One', serif;
+  --paragraph-font-family: 'Roboto', Helvetica Neue, Helvetica, Arial, sans-serif;
+  --code-font-family: 'Roboto Mono', Courier, monospace;
+
+  --font-size-h1: 2.986rem;
+  --font-size-h2: 2.488rem;
+  --font-size-h3: 2.074rem;
+  --font-size-h4: 1.728rem;
+  --font-size-h5: 1.44rem;
+  --font-size-h6: 1.2rem;
+  --font-size-p: 1rem;
+  --font-size-small: 0.833rem;
+
+  --grayscale-0: hsl(0deg 0% 0%);
+  --grayscale-10: hsl(0deg 0% 10%);
+  --grayscale-20: hsl(0deg 0% 20%);
+  --grayscale-30: hsl(0deg 0% 30%);
+  --grayscale-40: hsl(0deg 0% 40%);
+  --grayscale-50: hsl(0deg 0% 50%);
+  --grayscale-60: hsl(0deg 0% 60%);
+  --grayscale-70: hsl(0deg 0% 70%);
+  --grayscale-80: hsl(0deg 0% 80%);
+  --grayscale-90: hsl(0deg 0% 90%);
+  --grayscale-95: hsl(0deg 0% 95%);
+  --grayscale-100: hsl(0deg 0% 100%);
+
+  --text-color: var(--grayscale-10);
+  --background-color: var(--grayscale-95);
+
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 16px;
+  --spacing-lg: 32px;
+  --spacing-xl: 64px;
+
+  --transition-duration: 0.2s;
+  --transition-function: ease-in-out;
+
+  --purple-10: hsl(280 70% 10%);
+  --purple-30: hsl(280 70% 30%);
+  --purple-40: hsl(280 70% 40%);
+  --purple-50: hsl(280 70% 50%);
+  --purple-70: hsl(280 70% 70%);
+  --purple-90: hsl(280 70% 90%);
+  --purple-95: hsl(280 70% 95%);
+
+  --hue-rotate-animation-name: hueRotate;
+  /*--hue-rotate-animation-duration: 120s;*/
+  --hue-rotate-animation-duration: 20s;
+  --hue-rotate-animation-timing-function: linear;
+  --hue-rotate-animation-iteration-count: infinite;
+
+  * {
+    outline-offset: 2px;
+
+    &:focus {
+      outline-color: transparent;
+    }
+
+    &:focus-visible {
+      outline-color: var(--purple-50);
+    }
+  }
+}
+
+body {
+  font-family: var(--paragraph-font-family);
+  font-size: var(--font-size-p);
+  color: var(--text-color);
+  margin: 0;
+  padding: 0;
+}
+
+code {
+  font-family: var(--code-font-family);
+}
+
+h1 {
+  font-size: var(--font-size-h1);
+  font-family: var(--heading-font-family);
+}
+
+h2 {
+  font-size: var(--font-size-h2);
+  font-family: var(--heading-font-family);
+  font-weight: 400;
+}
+
+h3 {
+  font-size: var(--font-size-h3);
+  font-family: var(--heading-font-family);
+  font-weight: 400;
+}
+
+h4 {
+  font-size: var(--font-size-h4);
+  font-family: var(--heading-font-family);
+  font-weight: 400;
+}
+
+h5 {
+  font-size: var(--font-size-h5);
+  font-family: var(--heading-font-family);
+  font-weight: 400;
+}
+
+h6 {
+  font-size: var(--font-size-h6);
+  font-family: var(--heading-font-family);
+  font-weight: 400;
+}
+
+p {
+  font-size: var(--font-size-p);
+}
+
+a {
+  transition: var(--transition-duration) color var(--transition-function);
+  color: var(--text-color);
+  text-decoration-color: var(--purple-70);
+  text-decoration-thickness: 1px;
+
+  @media (prefers-reduced-motion: no-preference) {
+    animation-name: var(--hue-rotate-animation-name);
+    animation-duration: var(--hue-rotate-animation-duration);
+    animation-timing-function: var(--hue-rotate-animation-timing-function);
+    animation-iteration-count: var(--hue-rotate-animation-iteration-count);
+  }
+
+  &:hover {
+    color: var(--purple-40);
+  }
+}
