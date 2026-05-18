@@ -17,7 +17,6 @@
   select {
     border: 0;
     background-color: var(--grayscale-100);
-    border-left: 2px solid var(--purple-70);
     cursor: pointer;
     transition: var(--transition-duration) background-color var(--transition-function);
 

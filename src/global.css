@@ -46,13 +46,13 @@
   --purple-95: hsl(280 70% 95%);
 
   --hue-rotate-animation-name: hueRotate;
-  /*--hue-rotate-animation-duration: 120s;*/
-  --hue-rotate-animation-duration: 20s;
+  --hue-rotate-animation-duration: 120s;
   --hue-rotate-animation-timing-function: linear;
   --hue-rotate-animation-iteration-count: infinite;
 
   * {
-    outline-offset: 2px;
+    outline-offset: 4px;
+    outline: 2px solid transparent;
 
     &:focus {
       outline-color: transparent;
@@ -131,4 +131,8 @@ a {
   &:hover {
     color: var(--purple-40);
   }
+}
+
+button, input, select, textarea {
+  font-family: inherit;
 }

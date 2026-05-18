@@ -39,6 +39,7 @@
   @import '../global.css';
 
   .page {
+    min-height: 100dvh;
     display: grid;
     grid-auto-rows: min-content;
     grid-template-columns:

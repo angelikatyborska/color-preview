@@ -1,22 +1,30 @@
 <script lang="ts">
-  import { parseColorString } from '$lib/color';
+	import { parseColorString } from '$lib/color';
 
-  import ColorCard from '$lib/components/ColorCard.svelte';
-  import FormatSelect from '$lib/components/FormatSelect.svelte';
-  import { getFormat, getSortDirection, getSortField } from '$lib/components/appState.svelte';
-  import InputWithLabel from '$lib/components/InputWithLabel.svelte';
-  import { sortColors } from '$lib/colors';
-  import SortSelect from '$lib/components/SortSelect.svelte';
+	import ColorCard from '$lib/components/ColorCard.svelte';
+	import FormatSelect from '$lib/components/FormatSelect.svelte';
+	import { getFormat, getSortDirection, getSortField } from '$lib/components/appState.svelte';
+	import InputWithLabel from '$lib/components/InputWithLabel.svelte';
+	import { sortColors } from '$lib/colors';
+	import SortSelect from '$lib/components/SortSelect.svelte';
 
-  let value = $state<string>('hsla(30deg 82% 43% / 0.5)\nd\n#ff0\n\n#c0ffee35\n#c0ffee');
-  let colors = $derived.by(() => {
-    const colors = value
-      ?.split('\n')
-      .map((x) => parseColorString(x))
-      .filter((x) => !!x);
+	let value = $state<string>('');
+	let colors = $derived.by(() => {
+		if (value.trim()) {
+			const colors = value
+        ?.trim()
+				.split('\n')
+				.map((x) => parseColorString(x))
+				.filter((x) => !!x);
 
-    return sortColors(colors, getSortField(), getSortDirection());
-  });
+			return sortColors(colors, getSortField(), getSortDirection());
+		} else {
+			return [];
+    }
+	});
+
+	let placeholder = 'black\n#c0ffee\nhsl(240, 50%, 50% / 0.3)';
+
 </script>
 
 <div class="app">
@@ -25,10 +33,10 @@
       <h2 class="step-heading">1. Input</h2>
     </div>
     <InputWithLabel labelFor="color-list-input" label="Color list">
-      <textarea id="color-list-input" name="color-list-input" cols="10" rows="10" bind:value
-      ></textarea>
+      <textarea id="color-list-input" name="color-list-input" cols="10" rows="5" bind:value
+      placeholder={placeholder}></textarea>
     </InputWithLabel>
-    <p>Input a list of colors separated by new lines.</p>
+    <p>Copy-paste a list of colors separated by new lines.</p>
   </div>
   <div>
     <div class="step-heading-wrapper">
@@ -47,10 +55,17 @@
           </li>
         {/each}
       </ul>
+    {:else}
+      <p>No colors yet.</p>
     {/if}
   </div>
   <div>
     <h2 class="step-heading">3. Export</h2>
+    {#if colors.length > 0}
+      <p>TODO</p>
+    {:else}
+      <p>No colors yet.</p>
+    {/if}
   </div>
 </div>
 
@@ -80,7 +95,6 @@
     resize: vertical;
     background-color: var(--grayscale-100);
     border: 0;
-    border-left: 2px solid var(--purple-70);
     padding: var(--spacing-md);
     font-family: var(--code-font-family);
 
