@@ -1,5 +1,6 @@
 import type { ColorFormat } from '$lib/color';
 import type { ColorSortDirection, ColorSortField } from '$lib/colors';
+import { localStorageGetItem, localStorageSetItem } from '$lib/localStorage';
 
 export type AppState = {
   format: ColorFormat;
@@ -7,14 +8,20 @@ export type AppState = {
   sortDirection: ColorSortDirection;
 };
 
+const localStorageKey = (key: string) => {
+  return `color-preview-${key}`;
+};
+
 const appState = $state<AppState>({
-  format: 'rgb-hex',
-  sortField: 'original',
-  sortDirection: 'asc'
+  format: (localStorageGetItem(localStorageKey('format')) as ColorFormat) || 'rgb-hex',
+  sortField: (localStorageGetItem(localStorageKey('sortField')) as ColorSortField) || 'original',
+  sortDirection:
+    (localStorageGetItem(localStorageKey('sortDirection')) as ColorSortDirection) || 'asc'
 });
 
 export const setFormat = (format: ColorFormat) => {
   appState.format = format;
+  localStorageSetItem(localStorageKey('format'), format);
 };
 
 export const getFormat = () => {
@@ -32,4 +39,6 @@ export const getSortDirection = () => {
 export const setSort = (field: ColorSortField, direction: ColorSortDirection) => {
   appState.sortField = field;
   appState.sortDirection = direction;
+  localStorageSetItem(localStorageKey('sortField'), field);
+  localStorageSetItem(localStorageKey('sortDirection'), direction);
 };
