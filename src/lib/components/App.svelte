@@ -1,30 +1,29 @@
 <script lang="ts">
-	import { parseColorString } from '$lib/color';
+  import { parseColorString } from '$lib/color';
 
-	import ColorCard from '$lib/components/ColorCard.svelte';
-	import FormatSelect from '$lib/components/FormatSelect.svelte';
-	import { getFormat, getSortDirection, getSortField } from '$lib/components/appState.svelte';
-	import InputWithLabel from '$lib/components/InputWithLabel.svelte';
-	import { sortColors } from '$lib/colors';
-	import SortSelect from '$lib/components/SortSelect.svelte';
+  import ColorCard from '$lib/components/ColorCard.svelte';
+  import FormatSelect from '$lib/components/FormatSelect.svelte';
+  import { getFormat, getSortDirection, getSortField } from '$lib/components/appState.svelte';
+  import InputWithLabel from '$lib/components/InputWithLabel.svelte';
+  import { sortColors } from '$lib/colors';
+  import SortSelect from '$lib/components/SortSelect.svelte';
 
-	let value = $state<string>('');
-	let colors = $derived.by(() => {
-		if (value.trim()) {
-			const colors = value
+  let value = $state<string>('');
+  let colors = $derived.by(() => {
+    if (value.trim()) {
+      const colors = value
         ?.trim()
-				.split('\n')
-				.map((x) => parseColorString(x))
-				.filter((x) => !!x);
+        .split('\n')
+        .map((x) => parseColorString(x))
+        .filter((x) => !!x);
 
-			return sortColors(colors, getSortField(), getSortDirection());
-		} else {
-			return [];
+      return sortColors(colors, getSortField(), getSortDirection());
+    } else {
+      return [];
     }
-	});
+  });
 
-	let placeholder = 'black\n#c0ffee\nhsl(240, 50%, 50% / 0.3)';
-
+  let placeholder = 'black\n#c0ffee\nhsl(240, 50%, 50% / 0.3)';
 </script>
 
 <div class="app">
@@ -33,8 +32,14 @@
       <h2 class="step-heading">1. Input</h2>
     </div>
     <InputWithLabel labelFor="color-list-input" label="Color list">
-      <textarea id="color-list-input" name="color-list-input" cols="10" rows="5" bind:value
-      placeholder={placeholder}></textarea>
+      <textarea
+        id="color-list-input"
+        name="color-list-input"
+        cols="10"
+        rows="5"
+        bind:value
+        {placeholder}
+      ></textarea>
     </InputWithLabel>
     <p>Copy-paste a list of colors separated by new lines.</p>
   </div>

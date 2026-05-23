@@ -133,6 +133,9 @@ a {
   }
 }
 
-button, input, select, textarea {
+button,
+input,
+select,
+textarea {
   font-family: inherit;
 }
