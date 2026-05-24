@@ -1,4 +1,4 @@
-import { getAlpha, getHue, getSaturation, getLightness, type ParsedColor } from '$lib/color';
+import { getAlpha, getHue, getSaturation, getLightness, toHsl, type ParsedColor } from '$lib/color';
 
 export type ColorSortField =
   | 'original'
@@ -48,5 +48,22 @@ export function sortColors(
     const c1Value = c1.status === 'ok' ? sortFunction(c1) : emptyValue;
     const c2Value = c2.status === 'ok' ? sortFunction(c2) : emptyValue;
     return direction === 'asc' ? c1Value - c2Value : c2Value - c1Value;
+  });
+}
+
+export function markDuplicates(colors: ParsedColor[]) {
+  return colors.map((color) => {
+    if (color.status === 'error') {
+      return { ...color, duplicateOf: null };
+    }
+
+    const duplicateOf = colors.find(
+      (x) => x.status === 'ok' && toHsl(x) === toHsl(color) && x.originalIndex < color.originalIndex
+    );
+    return {
+      ...color,
+      duplicateOf:
+        typeof duplicateOf?.originalIndex === 'number' ? duplicateOf?.originalIndex : null
+    };
   });
 }

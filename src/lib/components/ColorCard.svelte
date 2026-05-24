@@ -79,6 +79,10 @@
     <h3 class="title">
       {#if color.status === 'ok'}
         <code>{formatted}</code>
+
+        {#if typeof color.duplicateOf === 'number'}
+          <span class="duplicate">→ duplicate of #{color.duplicateOf + 1}</span>
+        {/if}
       {:else}
         Invalid color
       {/if}
@@ -163,6 +167,14 @@
     margin: 0;
     font-weight: 700;
     font-size: var(--font-size-h5);
+
+    .duplicate {
+      white-space: nowrap;
+      font-weight: 400;
+      font-size: var(--font-size-p);
+      font-family: var(--paragraph-font-family);
+      color: var(--grayscale-30);
+    }
   }
 
   .original {

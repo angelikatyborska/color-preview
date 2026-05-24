@@ -5,7 +5,7 @@
   import FormatSelect from '$lib/components/FormatSelect.svelte';
   import { getFormat, getSortDirection, getSortField } from '$lib/components/appState.svelte';
   import InputWithLabel from '$lib/components/InputWithLabel.svelte';
-  import { sortColors } from '$lib/colors';
+  import { markDuplicates, sortColors } from '$lib/colors';
   import SortSelect from '$lib/components/SortSelect.svelte';
 
   let value = $state<string>('');
@@ -16,14 +16,14 @@
         .split('\n')
         .map((x, index) => parseColorString(x, index))
         .filter((x) => !!x);
-
-      return sortColors(colors, getSortField(), getSortDirection());
+      const markedColors = markDuplicates(colors);
+      return sortColors(markedColors, getSortField(), getSortDirection());
     } else {
       return [];
     }
   });
 
-  let placeholder = 'black\n#c0ffee\nhsl(240, 50%, 50% / 0.3)';
+  let placeholder = 'black\n#c0ffee\nhsl(240 50% 50% / 0.3)';
 </script>
 
 <div class="app">

@@ -9,6 +9,7 @@ export type ParsedColorOk = {
   colorInstance: ColorInstance;
   status: 'ok';
   originalIndex: number;
+  duplicateOf?: number | null;
 };
 
 export type ParsedColorError = {
@@ -16,6 +17,7 @@ export type ParsedColorError = {
   colorInstance: null;
   status: 'error';
   originalIndex: number;
+  duplicateOf?: number | null;
 };
 
 const alphaPrecision = 2;
