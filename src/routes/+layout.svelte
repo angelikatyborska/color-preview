@@ -43,8 +43,8 @@
     display: grid;
     grid-auto-rows: min-content;
     grid-template-columns:
-      [aside-left-start main-start aside-right-start] 1fr
-      [aside-left-end main-end aside-right-end];
+      [aside-left-start main-start] 1fr
+      [aside-left-end main-end];
     grid-template-rows: [header-start] auto [header-end main-start] auto [main-end footer-start] auto [footer-end];
     justify-content: center;
     row-gap: var(--spacing-lg);
@@ -54,8 +54,8 @@
       grid-auto-rows: min-content;
       grid-template-columns:
         [aside-left-start] minmax(min-content, 330px)
-        [aside-left-end main-start] minmax(min-content, 600px)
-        [main-end aside-right-start] 1fr [aside-right-end];
+        [aside-left-end main-start] minmax(min-content, 1000px)
+        [main-end] 1fr;
       grid-template-rows:
         [header-start main-start] min-content
         [header-end footer-start] 1fr [footer-end main-end];

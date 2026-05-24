@@ -27,7 +27,7 @@
 </script>
 
 <div class="app">
-  <div class="form">
+  <div class="section-input">
     <div class="step-heading-wrapper">
       <h2 class="step-heading">1. Input</h2>
     </div>
@@ -43,7 +43,7 @@
     </InputWithLabel>
     <p>Copy-paste a list of colors separated by new lines.</p>
   </div>
-  <div>
+  <div class="section-preview">
     <div class="step-heading-wrapper">
       <h2 class="step-heading">2. Preview</h2>
 
@@ -64,7 +64,7 @@
       <p>No colors yet.</p>
     {/if}
   </div>
-  <div>
+  <div class="section-export">
     <h2 class="step-heading">3. Export</h2>
     {#if colors.length > 0}
       <p>TODO</p>
@@ -79,6 +79,32 @@
     display: grid;
     grid-auto-rows: min-content;
     gap: var(--spacing-lg);
+
+    @media (width >= 1111px) {
+      grid-template-columns: 1fr 2fr;
+      grid-template-rows: auto 1fr;
+    }
+  }
+
+  .section-input {
+    @media (width >= 1111px) {
+      grid-column: 1 / 2;
+      grid-row: 1 / 2;
+    }
+  }
+
+  .section-preview {
+    @media (width >= 1111px) {
+      grid-column: 2 / 3;
+      grid-row: 1 / 3;
+    }
+  }
+
+  .section-export {
+    @media (width >= 1111px) {
+      grid-column: 1 / 2;
+      grid-row: 2 / 3;
+    }
   }
 
   .step-heading {

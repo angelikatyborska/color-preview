@@ -81,7 +81,7 @@
         <code>{formatted}</code>
 
         {#if typeof color.duplicateOf === 'number'}
-          <span class="duplicate">→ duplicate of #{color.duplicateOf + 1}</span>
+          <span class="duplicate">duplicate of #{color.duplicateOf + 1}</span>
         {/if}
       {:else}
         Invalid color
