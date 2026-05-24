@@ -8,17 +8,19 @@ export type ParsedColorOk = {
   originalString: string;
   colorInstance: ColorInstance;
   status: 'ok';
+  originalIndex: number;
 };
 
 export type ParsedColorError = {
   originalString: string;
   colorInstance: null;
   status: 'error';
+  originalIndex: number;
 };
 
 const alphaPrecision = 2;
 
-export const parseColorString = (string: string): ParsedColor => {
+export const parseColorString = (string: string, index: number): ParsedColor => {
   const normalized = string.trim().toLowerCase();
 
   if (normalized) {
@@ -27,7 +29,8 @@ export const parseColorString = (string: string): ParsedColor => {
       return {
         originalString: normalized,
         colorInstance,
-        status: 'ok'
+        status: 'ok',
+        originalIndex: index
       };
     } catch {
       // do nothing, the below return will handle it
@@ -37,7 +40,8 @@ export const parseColorString = (string: string): ParsedColor => {
   return {
     originalString: normalized,
     colorInstance: null,
-    status: 'error'
+    status: 'error',
+    originalIndex: index
   };
 };
 

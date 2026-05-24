@@ -18,9 +18,9 @@ import {
 } from './color';
 
 describe('color', () => {
-  const red = parseColorString('red');
-  const semiTransparentBlue = parseColorString('rgba(0, 0, 255, 0.5)');
-  const semiTransparentCoffee = parseColorString('#c0ffee35');
+  const red = parseColorString('red', 1);
+  const semiTransparentBlue = parseColorString('rgba(0, 0, 255, 0.5)', 2);
+  const semiTransparentCoffee = parseColorString('#c0ffee35', 3);
 
   if (red.status !== 'ok') throw new Error('Expected red to parse ok');
   if (semiTransparentBlue.status !== 'ok')
@@ -30,22 +30,22 @@ describe('color', () => {
 
   describe('parseColorString', () => {
     it('parses a valid color and returns status ok', () => {
-      const result = parseColorString('blue');
+      const result = parseColorString('blue', 1);
       expect(result.status).toBe('ok');
     });
 
     it('returns status error for an invalid color string', () => {
-      const result = parseColorString('notacolor');
+      const result = parseColorString('notacolor', 1);
       expect(result.status).toBe('error');
     });
 
     it('returns status error for an empty string', () => {
-      const result = parseColorString('');
+      const result = parseColorString('', 1);
       expect(result.status).toBe('error');
     });
 
     it('normalizes the original string to lowercase and trimmed', () => {
-      const result = parseColorString('  RED  ');
+      const result = parseColorString('  RED  ', 1);
       expect(result.originalString).toBe('red');
     });
   });
@@ -56,7 +56,7 @@ describe('color', () => {
     });
 
     it('returns the original string for an error color', () => {
-      const result = parseColorString('xyz');
+      const result = parseColorString('xyz', 1);
       expect(getOriginalString(result)).toBe('xyz');
     });
   });
@@ -139,7 +139,7 @@ describe('color', () => {
         });
 
         it('returns 0 for blue', () => {
-          const blue = parseColorString('blue');
+          const blue = parseColorString('blue', 1);
           if (blue.status !== 'ok') throw new Error();
           expect(getRed(blue)).toBe(0);
         });
@@ -151,7 +151,7 @@ describe('color', () => {
         });
 
         it('returns 128 for green (CSS "green")', () => {
-          const green = parseColorString('green');
+          const green = parseColorString('green', 1);
           if (green.status !== 'ok') throw new Error();
           expect(getGreen(green)).toBe(128);
         });
@@ -163,7 +163,7 @@ describe('color', () => {
         });
 
         it('returns 255 for blue', () => {
-          const blue = parseColorString('blue');
+          const blue = parseColorString('blue', 1);
           if (blue.status !== 'ok') throw new Error();
           expect(getBlue(blue)).toBe(255);
         });
@@ -177,7 +177,7 @@ describe('color', () => {
         });
 
         it('returns 120 for hsl(120, 50%, 40%)', () => {
-          const green = parseColorString('hsl(120, 50%, 40%)');
+          const green = parseColorString('hsl(120, 50%, 40%)', 1);
           if (green.status !== 'ok') throw new Error();
           expect(getHue(green)).toBe(120);
         });
@@ -189,7 +189,7 @@ describe('color', () => {
         });
 
         it('returns 50 for hsl(120, 50%, 40%)', () => {
-          const green = parseColorString('hsl(120, 50%, 40%)');
+          const green = parseColorString('hsl(120, 50%, 40%)', 1);
           if (green.status !== 'ok') throw new Error();
           expect(getSaturation(green)).toBe(50);
         });
@@ -201,7 +201,7 @@ describe('color', () => {
         });
 
         it('returns 40 for hsl(120, 50%, 40%)', () => {
-          const green = parseColorString('hsl(120, 50%, 40%)');
+          const green = parseColorString('hsl(120, 50%, 40%)', 1);
           if (green.status !== 'ok') throw new Error();
           expect(getLightness(green)).toBe(40);
         });
@@ -215,13 +215,13 @@ describe('color', () => {
         });
 
         it('returns 100 for white', () => {
-          const white = parseColorString('white');
+          const white = parseColorString('white', 1);
           if (white.status !== 'ok') throw new Error();
           expect(getWhiteness(white)).toBe(100);
         });
 
         it('returns 20 for hsl(120, 50%, 40%)', () => {
-          const green = parseColorString('hsl(120, 50%, 40%)');
+          const green = parseColorString('hsl(120, 50%, 40%)', 1);
           if (green.status !== 'ok') throw new Error();
           expect(getWhiteness(green)).toBe(20);
         });
@@ -233,13 +233,13 @@ describe('color', () => {
         });
 
         it('returns 100 for black', () => {
-          const black = parseColorString('black');
+          const black = parseColorString('black', 1);
           if (black.status !== 'ok') throw new Error();
           expect(getBlackness(black)).toBe(100);
         });
 
         it('returns 40 for hsl(120, 50%, 40%)', () => {
-          const green = parseColorString('hsl(120, 50%, 40%)');
+          const green = parseColorString('hsl(120, 50%, 40%)', 1);
           if (green.status !== 'ok') throw new Error();
           expect(getBlackness(green)).toBe(40);
         });

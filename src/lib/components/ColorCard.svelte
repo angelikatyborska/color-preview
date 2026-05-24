@@ -104,7 +104,7 @@
       {/if}
     </div>
     <dl class="original">
-      <dt>Original input</dt>
+      <dt>Original input #{color.originalIndex + 1}</dt>
       <dd>
         {#if getOriginalString(color).trim()}
           <code>{getOriginalString(color)}</code>

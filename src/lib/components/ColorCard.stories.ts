@@ -21,70 +21,70 @@ type Story = StoryObj<ComponentProps<typeof ColorCard>>;
 
 export const ValidColorRgb: Story = {
   args: {
-    color: parseColorString('red'),
+    color: parseColorString('red', 3),
     format: 'rgb'
   }
 };
 
 export const SemiTransparentRgb: Story = {
   args: {
-    color: parseColorString('rgba(0, 0, 255, 0.5)'),
+    color: parseColorString('rgba(0, 0, 255, 0.5)', 3),
     format: 'rgb'
   }
 };
 
 export const ValidColorRgbHex: Story = {
   args: {
-    color: parseColorString('red'),
+    color: parseColorString('red', 3),
     format: 'rgb-hex'
   }
 };
 
 export const SemiTransparentRgbHex: Story = {
   args: {
-    color: parseColorString('rgba(0, 0, 255, 0.5)'),
+    color: parseColorString('rgba(0, 0, 255, 0.5)', 3),
     format: 'rgb-hex'
   }
 };
 
 export const ValidColorHsl: Story = {
   args: {
-    color: parseColorString('red'),
+    color: parseColorString('red', 3),
     format: 'hsl'
   }
 };
 
 export const SemiTransparentHsl: Story = {
   args: {
-    color: parseColorString('rgba(0, 0, 255, 0.5)'),
+    color: parseColorString('rgba(0, 0, 255, 0.5)', 3),
     format: 'hsl'
   }
 };
 
 export const ValidColorHwb: Story = {
   args: {
-    color: parseColorString('red'),
+    color: parseColorString('red', 3),
     format: 'hwb'
   }
 };
 
 export const SemiTransparentHwb: Story = {
   args: {
-    color: parseColorString('rgba(0, 0, 255, 0.5)'),
+    color: parseColorString('rgba(0, 0, 255, 0.5)', 3),
     format: 'hwb'
   }
 };
 
 export const InvalidColor: Story = {
   args: {
-    color: parseColorString('notacolor'),
+    color: parseColorString('notacolor', 3),
     format: 'rgb'
   }
 };
 
 export const InvalidEmptyColor: Story = {
   args: {
-    color: parseColorString(''),
+    color: parseColorString('', 3),
     format: 'rgb'
   }
 };

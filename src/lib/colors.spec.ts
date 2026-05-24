@@ -2,10 +2,10 @@ import { describe, it, expect } from 'vitest';
 import { sortColors } from './colors';
 import { parseColorString } from './color';
 
-const whiteTransparent = parseColorString('#ffffffcc');
-const coffeeTransparent = parseColorString('#C0FFEE35');
-const blue = parseColorString('#3333FF');
-const yellow = parseColorString('#ddff00');
+const whiteTransparent = parseColorString('#ffffffcc', 1);
+const coffeeTransparent = parseColorString('#C0FFEE35', 2);
+const blue = parseColorString('#3333FF', 3);
+const yellow = parseColorString('#ddff00', 4);
 
 if (whiteTransparent.status !== 'ok') throw new Error('Expected white to parse ok');
 if (coffeeTransparent.status !== 'ok') throw new Error('Expected coffee to parse ok');

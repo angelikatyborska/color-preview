@@ -14,7 +14,7 @@
       const colors = value
         ?.trim()
         .split('\n')
-        .map((x) => parseColorString(x))
+        .map((x, index) => parseColorString(x, index))
         .filter((x) => !!x);
 
       return sortColors(colors, getSortField(), getSortDirection());
