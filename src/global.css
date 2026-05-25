@@ -26,7 +26,10 @@
   --grayscale-100: hsl(0deg 0% 100%);
 
   --text-color: var(--grayscale-10);
+  --text-color-alt: var(--grayscale-30);
   --background-color: var(--grayscale-95);
+  --background-color-alt: var(--grayscale-100);
+  --background-color-nav: var(--grayscale-100);
 
   --spacing-xs: 4px;
   --spacing-sm: 8px;
@@ -38,6 +41,7 @@
   --transition-function: ease-in-out;
 
   --purple-10: hsl(280 70% 10%);
+  --purple-20: hsl(280 70% 20%);
   --purple-30: hsl(280 70% 30%);
   --purple-40: hsl(280 70% 40%);
   --purple-50: hsl(280 70% 50%);
@@ -45,10 +49,34 @@
   --purple-90: hsl(280 70% 90%);
   --purple-95: hsl(280 70% 95%);
 
+  --header-background-step-1: var(--purple-10);
+  --header-background-step-2: var(--purple-30);
+  --header-background-step-3: var(--purple-50);
+  --header-background-step-4: var(--purple-70);
+  --header-background-step-5: var(--purple-90);
+
+  --select-hover-background-color: var(--purple-95);
+
   --hue-rotate-animation-name: hueRotate;
   --hue-rotate-animation-duration: 120s;
   --hue-rotate-animation-timing-function: linear;
   --hue-rotate-animation-iteration-count: infinite;
+
+  @media (prefers-color-scheme: dark) {
+    --text-color: var(--grayscale-95);
+    --text-color-alt: var(--grayscale-80);
+    --background-color: var(--grayscale-0);
+    --background-color-alt: var(--grayscale-20);
+    --background-color-nav: var(--grayscale-0);
+
+    --header-background-step-5: var(--purple-10);
+    --header-background-step-4: var(--purple-30);
+    --header-background-step-3: var(--purple-50);
+    --header-background-step-2: var(--purple-70);
+    --header-background-step-1: var(--purple-90);
+
+    --select-hover-background-color: var(--purple-30);
+  }
 
   *,
   *::before,
@@ -143,5 +171,6 @@ button,
 input,
 select,
 textarea {
+  color: var(--text-color);
   font-family: inherit;
 }

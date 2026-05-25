@@ -16,7 +16,7 @@
 <style>
   select {
     border: 0;
-    background-color: var(--grayscale-100);
+    background-color: var(--background-color-alt);
     cursor: pointer;
     transition: var(--transition-duration) background-color var(--transition-function);
 
@@ -28,7 +28,7 @@
     }
 
     &:hover {
-      background-color: var(--purple-95);
+      background-color: var(--select-hover-background-color);
     }
   }
 </style>

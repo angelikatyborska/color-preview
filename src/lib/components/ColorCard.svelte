@@ -53,7 +53,7 @@
     grid-template-areas: 'text preview';
     padding: var(--spacing-md);
     grid-template-columns: minmax(0, 10fr) minmax(0, 3fr);
-    background-color: var(--grayscale-100);
+    background-color: var(--background-color-alt);
   }
 
   .text {
@@ -77,7 +77,7 @@
       font-weight: 400;
       font-size: var(--font-size-p);
       font-family: var(--paragraph-font-family);
-      color: var(--grayscale-30);
+      color: var(--text-color-alt);
     }
   }
 
@@ -130,7 +130,7 @@
       content: '';
       position: absolute;
       inset: 0;
-      background-color: var(--color-card-preview-background-color, white);
+      background-color: var(--color-card-preview-background-color, var(--background-color-alt));
       z-index: 1;
     }
 
@@ -139,7 +139,7 @@
       position: relative;
       z-index: 2;
       font-family: var(--heading-font-family);
-      color: var(--grayscale-80);
+      color: rgb(from var(--text-color-alt) r g b / 0.5);
       user-select: none;
     }
   }

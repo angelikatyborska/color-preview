@@ -192,7 +192,7 @@
   textarea {
     resize: none;
     width: 100%;
-    background-color: var(--grayscale-100);
+    background-color: var(--background-color-alt);
     border: 0;
     padding: var(--spacing-md);
     font-family: var(--code-font-family);
