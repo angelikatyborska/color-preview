@@ -2,15 +2,6 @@
   import {
     type ColorFormat,
     getOriginalString,
-    getAlpha,
-    getRed,
-    getGreen,
-    getBlue,
-    getHue,
-    getSaturation,
-    getLightness,
-    getWhiteness,
-    getBlackness,
     toHex,
     toHsl,
     toHwb,
@@ -41,37 +32,6 @@
 
     return null;
   });
-
-  const table = $derived.by(() => {
-    if (color.status === 'ok') {
-      switch (format) {
-        case 'rgb':
-        case 'rgb-hex':
-          return [
-            ['R', getRed(color)],
-            ['G', getGreen(color)],
-            ['B', getBlue(color)],
-            ['A', getAlpha(color)]
-          ];
-        case 'hsl':
-          return [
-            ['H', getHue(color)],
-            ['S', getSaturation(color)],
-            ['L', getLightness(color)],
-            ['A', getAlpha(color)]
-          ];
-        case 'hwb':
-          return [
-            ['H', getHue(color)],
-            ['W', getWhiteness(color)],
-            ['B', getBlackness(color)],
-            ['A', getAlpha(color)]
-          ];
-      }
-    }
-
-    return [];
-  });
 </script>
 
 <div class="card">
@@ -87,26 +47,6 @@
         Invalid color
       {/if}
     </h3>
-    <div>
-      {#if color.status === 'ok'}
-        <table>
-          <thead>
-            <tr>
-              {#each table as row (row)}
-                <th>{row[0]}</th>
-              {/each}
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              {#each table as row (row)}
-                <td><code>{row[1]}</code></td>
-              {/each}
-            </tr>
-          </tbody>
-        </table>
-      {/if}
-    </div>
     <dl class="original">
       <dt>Original input #{color.originalIndex + 1}</dt>
       <dd>
@@ -133,7 +73,7 @@
     display: grid;
     grid-template-areas: 'text preview';
     padding: var(--spacing-md);
-    grid-template-columns: minmax(0, 5fr) minmax(0, 2fr);
+    grid-template-columns: minmax(0, 10fr) minmax(0, 3fr);
     background-color: var(--grayscale-100);
   }
 
@@ -141,21 +81,6 @@
     grid-area: text;
     display: grid;
     grid-template-rows: auto 1fr auto;
-
-    table {
-      border-collapse: collapse;
-      width: 100%;
-    }
-    tr {
-      border-radius: var(--spacing-xs);
-    }
-
-    td,
-    th {
-      padding: var(--spacing-xs);
-      border: 1px solid var(--grayscale-70);
-      width: 25%;
-    }
   }
 
   .card,
@@ -204,10 +129,10 @@
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    border-top: var(--spacing-sm) solid white;
-    border-left: var(--spacing-sm) solid white;
-    border-right: var(--spacing-sm) solid black;
-    border-bottom: var(--spacing-sm) solid black;
+    border-top: 6px solid white;
+    border-left: 6px solid white;
+    border-right: 6px solid black;
+    border-bottom: 6px solid black;
 
     &:before {
       content: '';
