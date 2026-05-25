@@ -18,6 +18,7 @@
     cursor: pointer;
 
     input {
+      cursor: pointer;
       accent-color: var(--purple-40);
 
       @media (prefers-reduced-motion: no-preference) {

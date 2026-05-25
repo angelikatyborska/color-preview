@@ -35,7 +35,7 @@
     }
   });
 
-  let placeholder = 'black\n#c0ffee\nhsl(240 50% 50% / 0.3)';
+  let placeholder = ['black', '#c0ffee', 'hsl(240 50% 50% / 0.3)'];
 
   let toExport = $derived.by(() => {
     return colors
@@ -67,8 +67,7 @@
           }
         }
       })
-      .filter((x) => !!x)
-      .join('\n');
+      .filter((x) => !!x);
   });
 </script>
 
@@ -82,9 +81,9 @@
         id="color-list-input"
         name="color-list-input"
         cols="10"
-        rows="5"
+        rows={Math.max(placeholder.length, colors.length) + 1}
         bind:value
-        {placeholder}
+        placeholder={placeholder.join('\n')}
       ></textarea>
     </InputWithLabel>
     <p>Copy-paste a list of CSS colors separated by new lines.</p>
@@ -125,8 +124,15 @@
       </div>
     </div>
 
-    {#if colors.length > 0}
-      <pre><code>{toExport}</code></pre>
+    {#if toExport.length > 0}
+      <textarea
+        readonly={true}
+        id="color-list-export"
+        name="color-list-export"
+        cols="10"
+        rows={Math.max(placeholder.length, toExport.length)}
+        bind:value={() => toExport.join('\n'), () => {}}
+      ></textarea>
     {:else}
       <p>No colors yet.</p>
     {/if}
@@ -184,7 +190,8 @@
   }
 
   textarea {
-    resize: vertical;
+    resize: none;
+    width: 100%;
     background-color: var(--grayscale-100);
     border: 0;
     padding: var(--spacing-md);
@@ -214,11 +221,5 @@
     padding: 0;
     list-style-type: '';
     gap: var(--spacing-md);
-  }
-
-  pre {
-    background-color: var(--grayscale-100);
-    border: 0;
-    padding: var(--spacing-md);
   }
 </style>

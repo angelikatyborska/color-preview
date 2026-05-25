@@ -5,9 +5,9 @@
   import Select from '$lib/components/Select.svelte';
 
   const options: Array<{ key: ColorFormat; label: string }> = [
+    { key: 'hsl', label: 'HSL' },
     { key: 'rgb-hex', label: 'RGB (hex)' },
     { key: 'rgb', label: 'RGB' },
-    { key: 'hsl', label: 'HSL' },
     { key: 'hwb', label: 'HWB' }
   ];
 </script>

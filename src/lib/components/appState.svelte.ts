@@ -16,7 +16,7 @@ const localStorageKey = (key: string) => {
 };
 
 const appState = $state<AppState>({
-  format: (localStorageGetItem(localStorageKey('format')) as ColorFormat) || 'rgb-hex',
+  format: (localStorageGetItem(localStorageKey('format')) as ColorFormat) || 'hsl',
   sortField: (localStorageGetItem(localStorageKey('sortField')) as ColorSortField) || 'original',
   sortDirection:
     (localStorageGetItem(localStorageKey('sortDirection')) as ColorSortDirection) || 'asc',

@@ -50,6 +50,12 @@
   --hue-rotate-animation-timing-function: linear;
   --hue-rotate-animation-iteration-count: infinite;
 
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
   * {
     outline-offset: 4px;
     outline: 2px solid transparent;
