@@ -1,13 +1,40 @@
 <script lang="ts">
   let { children } = $props();
+  import { page } from '$app/state';
+  const domain = 'https://bulk-color-preview.angelika.me';
+  const canonicalURL = new URL(page.url.pathname, domain).toString();
+  const title = 'Bulk Color Preview';
+  const description = "Preview many CSS colors in different formats at once. Unify their formats to RGB, HSL, or HWB, then sort them by hue, lightness, saturation, or alpha, and export a cleaned up, uniform list.";
+  const image = 'og.png'
 </script>
 
 <svelte:head>
-  <title>Bulk Color Preview</title>
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <link rel="icon" type="image/png" sizes="180x180" href="/favicon-180.png" />
   <link rel="icon" type="image/png" sizes="300x300" href="/favicon-300.png" />
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+
+  <!-- Canonical URL -->
+  <link rel="canonical" href={canonicalURL} />
+
+  <!-- Primary Meta Tags -->
+  <title>{title}</title>
+  <meta name="title" content={title} />
+  <meta name="description" content={description} />
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content={domain} />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:image" content={new URL(image, domain).toString()} />
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image" />
+  <meta property="twitter:url" content={domain} />
+  <meta property="twitter:title" content={title} />
+  <meta property="twitter:description" content={description} />
+  <meta property="twitter:image" content={new URL(image, domain).toString()} />
 </svelte:head>
 
 <div class="page">
