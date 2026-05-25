@@ -1,13 +1,5 @@
 <script lang="ts">
-  import {
-    type ColorFormat,
-    getOriginalString,
-    toHex,
-    toHsl,
-    toHwb,
-    toRgb,
-    type ParsedColor
-  } from '$lib/color';
+  import { type ColorFormat, getOriginalString, type ParsedColor, formatColor } from '$lib/color';
 
   interface Props {
     color: ParsedColor;
@@ -17,20 +9,7 @@
   const { color, format }: Props = $props();
 
   const formatted = $derived.by(() => {
-    if (color.status === 'ok') {
-      switch (format) {
-        case 'rgb':
-          return toRgb(color);
-        case 'rgb-hex':
-          return toHex(color);
-        case 'hsl':
-          return toHsl(color);
-        case 'hwb':
-          return toHwb(color);
-      }
-    }
-
-    return null;
+    return formatColor(color, format);
   });
 </script>
 

@@ -125,3 +125,20 @@ export const getLightness = (color: ParsedColorOk) => {
 export const getAlpha = (color: ParsedColorOk) => {
   return format(color.colorInstance.alpha(), alphaPrecision);
 };
+
+export const formatColor = (color: ParsedColor, format: ColorFormat) => {
+  if (color.status === 'ok') {
+    switch (format) {
+      case 'rgb':
+        return toRgb(color);
+      case 'rgb-hex':
+        return toHex(color);
+      case 'hsl':
+        return toHsl(color);
+      case 'hwb':
+        return toHwb(color);
+    }
+  }
+
+  return null;
+};

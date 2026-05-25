@@ -14,7 +14,8 @@ import {
   toHsl,
   toHwb,
   getWhiteness,
-  getBlackness
+  getBlackness,
+  formatColor
 } from './color';
 
 describe('color', () => {
@@ -244,6 +245,27 @@ describe('color', () => {
           expect(getBlackness(green)).toBe(40);
         });
       });
+    });
+  });
+
+  describe('formatColor', () => {
+    const sample = parseColorString('#f0e322dd', 4);
+    if (sample.status !== 'ok') throw new Error('Expected sample to parse ok');
+
+    it('returns rgb format for the sample color', () => {
+      expect(formatColor(sample, 'rgb')).toBe('rgb(240 227 34 / 0.87)');
+    });
+
+    it('returns rgb-hex format for the sample color', () => {
+      expect(formatColor(sample, 'rgb-hex')).toBe('#F0E322DD');
+    });
+
+    it('returns hsl format for the sample color', () => {
+      expect(formatColor(sample, 'hsl')).toBe('hsl(56 87% 54% / 0.87)');
+    });
+
+    it('returns hwb format for the sample color', () => {
+      expect(formatColor(sample, 'hwb')).toBe('hwb(56 13% 6% / 0.87)');
     });
   });
 });

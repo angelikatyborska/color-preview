@@ -10,7 +10,7 @@
 
 <div class="page">
   <header>
-    <h1><div>Bulk Color Preview</div></h1>
+    <h1><span>Bulk Color Preview</span></h1>
     <div></div>
     <div></div>
     <div></div>

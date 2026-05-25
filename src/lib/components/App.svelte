@@ -3,10 +3,22 @@
 
   import ColorCard from '$lib/components/ColorCard.svelte';
   import FormatSelect from '$lib/components/FormatSelect.svelte';
-  import { getFormat, getSortDirection, getSortField } from '$lib/components/appState.svelte';
+  import {
+    getExportDeduplicated,
+    getExportFormatted,
+    getExportSorted,
+    getFormat,
+    getSortDirection,
+    getSortField,
+    setExportDeduplicated,
+    setExportFormatted,
+    setExportSorted
+  } from '$lib/components/appState.svelte';
   import InputWithLabel from '$lib/components/InputWithLabel.svelte';
   import { markDuplicates, sortColors } from '$lib/colors';
   import SortSelect from '$lib/components/SortSelect.svelte';
+  import { formatColor } from '$lib/color';
+  import Checkbox from '$lib/components/Checkbox.svelte';
 
   let value = $state<string>('');
   let colors = $derived.by(() => {
@@ -24,6 +36,40 @@
   });
 
   let placeholder = 'black\n#c0ffee\nhsl(240 50% 50% / 0.3)';
+
+  let toExport = $derived.by(() => {
+    return colors
+      .filter((color) => {
+        if (color.status === 'ok') {
+          if (getExportDeduplicated()) {
+            return !(typeof color.duplicateOf === 'number');
+          } else {
+            return true;
+          }
+        } else {
+          return false;
+        }
+      })
+      .toSorted((color1, color2) => {
+        if (getExportSorted()) {
+          // the colors are already sorted
+          return 0;
+        } else {
+          return color1.originalIndex - color2.originalIndex;
+        }
+      })
+      .map((color) => {
+        if (color.status === 'ok') {
+          if (getExportFormatted()) {
+            return formatColor(color, getFormat());
+          } else {
+            return color.originalString;
+          }
+        }
+      })
+      .filter((x) => !!x)
+      .join('\n');
+  });
 </script>
 
 <div class="app">
@@ -41,7 +87,7 @@
         {placeholder}
       ></textarea>
     </InputWithLabel>
-    <p>Copy-paste a list of colors separated by new lines.</p>
+    <p>Copy-paste a list of CSS colors separated by new lines.</p>
   </div>
   <div class="section-preview">
     <div class="step-heading-wrapper">
@@ -65,9 +111,22 @@
     {/if}
   </div>
   <div class="section-export">
-    <h2 class="step-heading">3. Export</h2>
+    <div class="step-heading-wrapper">
+      <h2 class="step-heading">3. Export</h2>
+
+      <div class="settings">
+        <Checkbox label="Formatted" getter={getExportFormatted} setter={setExportFormatted} />
+        <Checkbox label="Sorted" getter={getExportSorted} setter={setExportSorted} />
+        <Checkbox
+          label="Deduplicated"
+          getter={getExportDeduplicated}
+          setter={setExportDeduplicated}
+        />
+      </div>
+    </div>
+
     {#if colors.length > 0}
-      <p>TODO</p>
+      <pre><code>{toExport}</code></pre>
     {:else}
       <p>No colors yet.</p>
     {/if}
@@ -120,7 +179,8 @@
     flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
-    gap: var(--spacing-lg);
+    column-gap: var(--spacing-lg);
+    row-gap: var(--spacing-md);
   }
 
   textarea {
@@ -142,7 +202,7 @@
     display: flex;
     flex-direction: row;
     justify-content: end;
-    gap: var(--spacing-xs);
+    column-gap: var(--spacing-sm);
     font-size: var(--font-size-small);
   }
 
@@ -154,5 +214,11 @@
     padding: 0;
     list-style-type: '';
     gap: var(--spacing-md);
+  }
+
+  pre {
+    background-color: var(--grayscale-100);
+    border: 0;
+    padding: var(--spacing-md);
   }
 </style>
