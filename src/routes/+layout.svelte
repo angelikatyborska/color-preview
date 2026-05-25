@@ -35,6 +35,12 @@
   <meta property="twitter:title" content={title} />
   <meta property="twitter:description" content={description} />
   <meta property="twitter:image" content={new URL(image, domain).toString()} />
+
+  <script
+    defer
+    data-domain="bulk-color-preview.angelika.me"
+    src="https://plausible.io/js/script.js"
+  ></script>
 </svelte:head>
 
 <div class="page">
