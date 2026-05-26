@@ -173,4 +173,5 @@ select,
 textarea {
   color: var(--text-color);
   font-family: inherit;
+  font-size: inherit;
 }

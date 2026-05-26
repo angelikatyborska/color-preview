@@ -19,6 +19,7 @@
     background-color: var(--background-color-alt);
     cursor: pointer;
     transition: var(--transition-duration) background-color var(--transition-function);
+    border-radius: 0;
 
     @media (prefers-reduced-motion: no-preference) {
       animation-name: var(--hue-rotate-animation-name);
