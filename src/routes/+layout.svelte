@@ -4,8 +4,9 @@
   const domain = 'https://bulk-color-preview.angelika.me';
   const canonicalURL = new URL(page.url.pathname, domain).toString();
   const title = 'Bulk Color Preview';
-  const description = "Preview many CSS colors in different formats at once. Unify their formats to RGB, HSL, or HWB, then sort them by hue, lightness, saturation, or alpha, and export a cleaned up, uniform list.";
-  const image = 'og.png'
+  const description =
+    'Preview many CSS colors in different formats at once. Unify their formats to RGB, HSL, or HWB, then sort them by hue, lightness, saturation, or alpha, and export a cleaned up, uniform list.';
+  const image = 'og.png';
 </script>
 
 <svelte:head>

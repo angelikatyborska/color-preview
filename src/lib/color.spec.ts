@@ -45,9 +45,9 @@ describe('color', () => {
       expect(result.status).toBe('error');
     });
 
-    it('normalizes the original string to lowercase and trimmed', () => {
+    it('normalizes the original string to trimmed', () => {
       const result = parseColorString('  RED  ', 1);
-      expect(result.originalString).toBe('red');
+      expect(result.originalString).toBe('RED');
     });
   });
 

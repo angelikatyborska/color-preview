@@ -23,7 +23,7 @@ export type ParsedColorError = {
 const alphaPrecision = 2;
 
 export const parseColorString = (string: string, index: number): ParsedColor => {
-  const normalized = string.trim().toLowerCase();
+  const normalized = string.trim();
 
   if (normalized) {
     try {
